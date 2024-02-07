@@ -7,7 +7,9 @@ interface WhiteCardProps {
 
 const WhiteCard: React.FC<WhiteCardProps> = ({ children, className }) => {
   return (
-    <div className={`flex flex-col bg-white w-full h-fit border border-gray-400 p-4 rounded-xl mb-40 ${className}`}>
+    <div
+      className={` bg-white w-full h-fit border border-gray-400 p-4 rounded-xl ${className}`}
+    >
       {children}
     </div>
   );

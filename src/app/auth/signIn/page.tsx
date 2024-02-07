@@ -18,7 +18,7 @@ export default function SignIn() {
 
   return (
     <div className="flex w-full h-full justify-center items-center px-4">
-      <WhiteCard className="max-w-md">
+      <WhiteCard className="max-w-md flex flex-col mb-40">
         <span className="text-xl">Sign In</span>
         <span className="text-black/50 mb-4">
           Please sign in to your account

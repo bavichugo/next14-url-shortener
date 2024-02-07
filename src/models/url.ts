@@ -3,7 +3,7 @@ import mongoose, { Schema, Document } from "mongoose";
 export interface IUrlRecord extends Document {
   long_url: string;
   short_url: string;
-  user: string;
+  userId: string;
 }
 
 const urlRecordSchema = new Schema(
@@ -16,11 +16,14 @@ const urlRecordSchema = new Schema(
       type: String,
       require: true,
     },
-    user: {
+    userId: {
       type: String,
       required: true,
     },
-
+    clicks: {
+      type: Number,
+      default: 0
+    }
   },
   { timestamps: true }
 );

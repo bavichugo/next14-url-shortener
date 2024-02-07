@@ -1,11 +1,12 @@
 import createUrlAction from "@/actions/createUrlAction";
+import TextDisplay from "@/components/TextDisplay";
 import WhiteCard from "@/components/WhiteCard";
 import React from "react";
 
 export default async function Home() {
   return (
     <div className="h-full container mx-auto flex justify-center items-center">
-      <WhiteCard className="max-w-3xl">
+      <WhiteCard className="max-w-3xl mb-40">
         <form className="flex flex-col gap-4" action={createUrlAction}>
           <h1 className="text-xl">Create custom URL</h1>
           <FormInput
@@ -16,12 +17,7 @@ export default async function Home() {
             key="longUrl"
           />
           <div className="flex items-center gap-4 w-full">
-            <div className="flex flex-col h-full">
-              <label className="font-bold">Domain</label>
-              <span className="bg-gray-300 px-4 py-3 rounded">
-                shorturl.com
-              </span>
-            </div>
+            <TextDisplay label="Domain" text="shorturl.com" />
             <div className="flex flex-col">
               <label className="text-transparent">/</label>
               <span className="py-2">/</span>
@@ -42,7 +38,7 @@ export default async function Home() {
   );
 }
 
-type IFormInput = {
+interface IFormInput {
   label: string;
   id: string;
   placeholder: string;
