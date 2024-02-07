@@ -1,4 +1,5 @@
 import createUrlAction from "@/actions/createUrlAction";
+import SubmitButton from "@/components/SubmitButton";
 import TextDisplay from "@/components/TextDisplay";
 import WhiteCard from "@/components/WhiteCard";
 import React from "react";
@@ -17,7 +18,7 @@ export default async function Home() {
             key="longUrl"
           />
           <div className="flex items-center gap-4 w-full">
-            <TextDisplay label="Domain" text="shorturl.com" />
+            <TextDisplay label="Domain" labelClass="font-bold" text="shorturl.com" />
             <div className="flex flex-col">
               <label className="text-transparent">/</label>
               <span className="py-2">/</span>
@@ -29,9 +30,9 @@ export default async function Home() {
               key="shortUrl"
             />
           </div>
-          <button className="mx-auto px-20 py-3 w-fit bg-orange-500 hover:bg-orange-600 rounded-xl">
+          <SubmitButton className="mx-auto">
             Create your link
-          </button>
+          </SubmitButton>
         </form>
       </WhiteCard>
     </div>
