@@ -3,6 +3,7 @@ import { signIn, useSession } from "next-auth/react";
 import { useEffect } from "react";
 import { useRouter } from "next/navigation";
 import { FcGoogle } from "react-icons/fc";
+import WhiteCard from "@/components/WhiteCard";
 
 export default function SignIn() {
   const { data: session } = useSession();
@@ -17,7 +18,7 @@ export default function SignIn() {
 
   return (
     <div className="flex w-full h-full justify-center items-center px-4">
-      <div className="flex flex-col bg-white max-w-md w-full h-fit border border-gray-400 p-4 rounded-xl mb-40">
+      <WhiteCard className="max-w-md">
         <span className="text-xl">Sign In</span>
         <span className="text-black/50 mb-4">
           Please sign in to your account
@@ -28,7 +29,7 @@ export default function SignIn() {
         >
           <FcGoogle className="text-2xl" /> <span>Sign in with Google</span>
         </button>
-      </div>
+      </WhiteCard>
     </div>
   );
 }
