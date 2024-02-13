@@ -6,8 +6,11 @@ interface IContext {
   params: { siteId: string};
 }
 
-export async function GET(request: NextRequest) {
-  return NextResponse.redirect("https://medium.com/@patel.d/quick-guide-add-get-api-in-next-js-13-app-router-69f6e5e938be");
+export async function GET(request: NextRequest, context: IContext) {
+  await dbConnect();
+  const siteId = context.params.siteId;
+  const result = await UrlRecord.findOne({ short_url: siteId });
+  return NextResponse.redirect(result.long_url);
 }
 
 export async function DELETE(request: NextRequest, context: IContext) {

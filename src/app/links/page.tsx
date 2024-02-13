@@ -41,6 +41,7 @@ const UrlDisplay: React.FC<IUrlDisplay> = ({ label, link }) => {
       <a
         className="max-w-xl w-full overflow-scroll whitespace-nowrap underline text-blue-600 hover:text-blue-800 visited:text-purple-600"
         href={link}
+        target="_blank"
       >
         {link}
       </a>
