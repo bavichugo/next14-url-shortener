@@ -2,6 +2,7 @@
 import { signOut, useSession } from "next-auth/react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
+import Button from "./Button";
 
 export default function NavBar() {
   const { data: session } = useSession();
@@ -25,12 +26,9 @@ export default function NavBar() {
         )}
       </nav>
       {session && (
-        <button
-          className="bg-orange-500 hover:bg-orange-600 rounded px-2 py-1"
-          onClick={() => signOut()}
-        >
+        <Button color="orange" onClick={signOut}>
           Sign Out
-        </button>
+        </Button>
       )}
     </header>
   );

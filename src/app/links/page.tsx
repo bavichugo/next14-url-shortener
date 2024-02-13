@@ -1,7 +1,7 @@
 import fetchUrls from "@/actions/fetchUrls";
 import WhiteCard from "@/components/WhiteCard";
-import DeleteUrlButton from "./DeleteUrlButton";
 import React from "react";
+import DeleteButton from "./DeleteButton";
 
 export default async function YourLinksPage() {
   const urls = await fetchUrls();
@@ -16,7 +16,7 @@ export default async function YourLinksPage() {
               label="Short URL: "
               link={url.short_url}
             />
-            <DeleteUrlButton />
+            <DeleteButton shortUrl={url.short_url} />
           </div>
           <UrlDisplay
             key={url.long_url}
