@@ -3,7 +3,7 @@ import "./globals.css";
 import SessionProvider from "@/components/SessionProvider";
 import { getServerSession } from "next-auth";
 import NavBar from "@/components/NavBar";
-import { redirect } from "next/navigation";
+import { authOptions } from "@/app/api/auth/[...nextauth]/route";
 
 export const metadata: Metadata = {
   title: "Create Next App",
@@ -15,7 +15,7 @@ export default async function RootLayout({
 }: Readonly<{
   children: React.ReactNode;
 }>) {
-  const session = await getServerSession();
+  const session = await getServerSession(authOptions);
 
   return (
     <html lang="en">

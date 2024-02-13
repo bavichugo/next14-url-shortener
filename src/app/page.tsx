@@ -1,10 +1,18 @@
+import { authOptions } from "@/app/api/auth/[...nextauth]/route";
 import createUrlAction from "@/actions/createUrlAction";
 import SubmitButton from "@/components/SubmitButton";
 import TextDisplay from "@/components/TextDisplay";
 import WhiteCard from "@/components/WhiteCard";
+import { getServerSession } from "next-auth";
+import { redirect } from "next/navigation";
 import React from "react";
 
 export default async function Home() {
+  const session = await getServerSession(authOptions);
+  if (!session || !session.user) {
+    redirect("/auth/signIn");
+  }
+
   return (
     <div className="h-full container mx-auto flex justify-center items-center">
       <WhiteCard className="max-w-3xl mb-40">

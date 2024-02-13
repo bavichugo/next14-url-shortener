@@ -2,8 +2,16 @@ import fetchUrls from "@/actions/fetchUrls";
 import WhiteCard from "@/components/WhiteCard";
 import React from "react";
 import DeleteButton from "./DeleteButton";
+import { getServerSession } from "next-auth";
+import { authOptions } from "@/app/api/auth/[...nextauth]/route";
+import { redirect } from "next/navigation";
 
 export default async function YourLinksPage() {
+  const session = await getServerSession(authOptions);
+  if (!session || !session.user) {
+    redirect("/auth/signIn");
+  }
+
   const urls = await fetchUrls();
 
   return (
