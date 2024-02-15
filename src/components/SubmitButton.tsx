@@ -2,19 +2,16 @@
 
 import React from "react";
 import { useFormStatus } from "react-dom";
+import Button from "./Button";
+import { IButton } from "./Button";
 
-interface ISubmitButton {
-  children: string;
-  className: string;
-}
-
-const SubmitButton: React.FC<ISubmitButton> = ({ children, className }) => {
+const SubmitButton: React.FC<IButton> = ({ children, className, color }) => {
   const { pending } = useFormStatus();
 
   return (
-    <button className={`${pending ? "bg-orange-600" : "bg-orange-500 hover:bg-orange-600"} px-20 py-3 w-fit rounded-xl ${className}`} type="submit" disabled={pending}>
+    <Button color={color} className={className} disabled={pending}>
       {pending ? "Submitting..." : children}
-    </button>
+    </Button>
   );
 };
 

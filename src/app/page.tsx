@@ -38,7 +38,7 @@ export default async function Home() {
               key="shortUrl"
             />
           </div>
-          <SubmitButton className="mx-auto">
+          <SubmitButton color="orange" className="mx-auto px-20 py-3 rounded-xl">
             Create your link
           </SubmitButton>
         </form>
