@@ -24,7 +24,7 @@ export default async function YourLinksPage() {
               label="Short URL: "
               link={url.short_url}
             />
-            <DeleteButton shortUrl={url.short_url} />
+            <DeleteButton key={url.short_url} shortUrl={url.short_url} />
           </div>
           <UrlDisplay
             key={url.long_url}

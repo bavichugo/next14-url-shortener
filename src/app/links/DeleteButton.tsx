@@ -4,6 +4,8 @@ import CloseButton from "@/components/CloseButton";
 import WhiteCard from "@/components/WhiteCard";
 import { useEffect, useRef, useState } from "react";
 import Button from "@/components/Button";
+import SubmitButton from "@/components/SubmitButton";
+import deleteUrlAction from "@/actions/deleteUrlAction";
 
 interface IDeleteButton {
   shortUrl: string;
@@ -13,17 +15,10 @@ const DeleteButton: React.FC<IDeleteButton> = ({ shortUrl }) => {
   const [showModal, setShowModal] = useState<boolean>(false);
   const modalRef = useRef<HTMLDialogElement>(null);
 
-  const onDeleteHandler = async (event: React.FormEvent<HTMLFormElement>) => {
-    event.preventDefault();
-    try {
-      const response = await fetch(`/${shortUrl}`, {
-        method: "DELETE",
-      });
-
-    } catch (err) {
-      console.log();
-    }
-  };
+  // binding so that shortUrl value is passed as a parameter to the deleteUrlAction
+  // it is also possible to add a hidden field with the shortUrl as the value,
+  // but I decided to follow this approach as a learning opportunity
+  const deleteUrlActionWithShortUrl = deleteUrlAction.bind(null, shortUrl);
 
   useEffect(() => {
     if (showModal) {
@@ -42,8 +37,11 @@ const DeleteButton: React.FC<IDeleteButton> = ({ shortUrl }) => {
       />
       {showModal && (
         <dialog className="max-w-sm w-full" ref={modalRef}>
-          <WhiteCard className="flex flex-col">
-            <form onSubmit={onDeleteHandler}>
+          <WhiteCard>
+            <form
+              className="flex flex-col"
+              action={deleteUrlActionWithShortUrl}
+            >
               <span className="font-bold">
                 Are you sure to delete this URL?
               </span>
@@ -52,15 +50,14 @@ const DeleteButton: React.FC<IDeleteButton> = ({ shortUrl }) => {
               <div className="flex ml-auto gap-2">
                 <Button
                   className="border hover:bg-black/10 rounded px-2 py-1"
+                  type="button"
                   onClick={() => {
                     setShowModal(false);
                   }}
                 >
                   Cancel
                 </Button>
-                <Button color="orange" type="submit">
-                  Delete
-                </Button>
+                <SubmitButton color="orange">Delete</SubmitButton>
               </div>
             </form>
           </WhiteCard>
