@@ -16,23 +16,35 @@ export default async function YourLinksPage() {
 
   return (
     <div className="mx-auto w-full max-w-4xl flex flex-col gap-4 p-4">
-      {urls?.map((url) => (
-        <WhiteCard className="flex flex-col" key={url.short_url}>
-          <div className="flex justify-between w-full">
+      {urls?.length ? (
+        urls?.map((url) => (
+          <WhiteCard className="flex flex-col" key={url.short_url}>
+            <div className="flex justify-between w-full">
+              <UrlDisplay
+                key={url.short_url}
+                label="Short URL: "
+                link={url.short_url}
+              />
+              <DeleteButton key={url.short_url} shortUrl={url.short_url} />
+            </div>
             <UrlDisplay
-              key={url.short_url}
-              label="Short URL: "
-              link={url.short_url}
+              key={url.long_url}
+              label="Long URL: "
+              link={url.long_url}
             />
-            <DeleteButton key={url.short_url} shortUrl={url.short_url} />
-          </div>
-          <UrlDisplay
-            key={url.long_url}
-            label="Long URL: "
-            link={url.long_url}
-          />
-        </WhiteCard>
-      ))}
+          </WhiteCard>
+        ))
+      ) : (
+        <>
+          <span className="mx-auto font-bold text-xl">
+            You do not have any URLs
+          </span>
+          <span className="mx-auto">
+            Seems like you have not created any short URLs yet, head to the main page
+            to create it!
+          </span>
+        </>
+      )}
     </div>
   );
 }
