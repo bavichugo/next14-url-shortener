@@ -16,7 +16,6 @@ export default async function deleteUrlAction(
       return console.log("No record found to delete.");
     }
 
-    console.log("Success deleting route!");
     revalidatePath("/links");
   } catch (err) {
     throw new Error("Failed to delete URL record.");
