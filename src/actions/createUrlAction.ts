@@ -5,7 +5,8 @@ import dbConnect from "@/lib/dbConnect";
 import { getServerSession } from "next-auth";
 import { authOptions } from "@/app/api/auth/[...nextauth]/route";
 import { revalidatePath } from "next/cache";
-import { generateRandomShort } from "@/helper/urlHelper";
+import { generateRandomShort, isValidUrl } from "@/helper/urlHelper";
+import { z } from "zod";
 
 export default async function createUrlAction(formData: FormData) {
   const session = await getServerSession(authOptions);
@@ -13,7 +14,21 @@ export default async function createUrlAction(formData: FormData) {
   const userId = session?.user?.id as string;
   let short_url = formData.get("shortUrl") as string;
 
+  const urlSchema = z.object({
+    long_url: z
+      .string()
+      .refine((val) => isValidUrl(val), { message: "Invalid URL" }),
+    short_url: z.string(),
+    userId: z.string(),
+  });
+
   try {
+    const data = urlSchema.parse({
+      long_url,
+      short_url,
+      userId,
+    });
+
     await dbConnect();
 
     // Validating that the short_url is unique

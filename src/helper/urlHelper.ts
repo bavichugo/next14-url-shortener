@@ -8,3 +8,19 @@ export function generateRandomShort(): string {
   }
   return res;
 }
+
+export function isValidUrl(url: string): boolean {
+  const prefixes = ['http', 'https', 'ftp'];
+  let isValidUrl = false;
+  
+  const startsWithPrefix = prefixes.some(prefix => url.startsWith(`${prefix}://`));
+  if (!startsWithPrefix) return false;
+
+  try {
+    new URL(url);
+    isValidUrl = true;
+  } catch (err) {
+    isValidUrl = false;
+  }
+  return isValidUrl;
+}
